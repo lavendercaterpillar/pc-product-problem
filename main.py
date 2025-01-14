@@ -1,6 +1,31 @@
 def largest_product(grid, n):
-    # Your solution here!
-    pass
+    max_product = None
+
+    # Iterate row-wise
+    for i in range(len(grid)):
+        # Only go up to the nth to last item to avoid out-of-bounds
+        for j in range(len(grid[0]) - n + 1):
+            product = 1
+            # Iterate over the n following items in the row
+            for k in range(n):
+                product *= grid[i][j+k]
+            # Set the new max_product if we find a bigger one
+            if max_product is None or product > max_product:
+                max_product = product
+
+    # Iterate column-wise
+    for j in range(len(grid[0])):
+        # Only go up to the nth to last item to avoid out-of-bounds
+        for i in range(len(grid) - n + 1):
+            product = 1
+            # Iterate over the n following items in the column
+            for k in range(n):
+                product *= grid[i+k][j]
+            # Set the new max_product if we find a bigger one
+            if max_product is None or product > max_product:
+                max_product = product
+
+    return max_product
 
 
 grid = [
